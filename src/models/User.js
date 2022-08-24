@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 });
 
 //keyword function is to scope the function to the user 'this'
-userSchema.pre('save', function() {
+userSchema.pre('save', function(next) {
     const user = this;
     if(!user.isModified('password')) {
         return next();
