@@ -1,19 +1,21 @@
-require('dotenv');
+require('dotenv').config();
 require('./models/User');
+require('./models/Track');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
+const trackRoutes = require('./routes/trackRoutes')
 const requireAuth = require('./middlewares/requireAuth');
-
 
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(authRoutes)
+app.use(trackRoutes);
 
-const mongoUri = `mongodb+srv://damatoaj:HappySongsForHappyPeople2003!@cluster0.l2cfy.mongodb.net/?retryWrites=true&w=majority`
+const mongoUri = process.env.MONDGOURI;
 
 mongoose.connect(mongoUri);
 
